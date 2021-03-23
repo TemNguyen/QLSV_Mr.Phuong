@@ -12,17 +12,27 @@ namespace BaiTap_Mr.Phuong
 {
     public partial class Form1 : Form
     {
+        public delegate void sendInfor(string[] Data);
+        public sendInfor send;
+        private string[] sendInforSV(string[] SVData)
+        {
+            int index = dataGridView1.CurrentRow.Index;
+
+            SVData = new string[CSDL.Instance.DTSV.Columns.Count];
+            for (int i = 0; i < CSDL.Instance.DTSV.Columns.Count; i++)
+            {
+                SVData[i] = dataGridView1.Rows[index].Cells[i].Value.ToString();
+                MessageBox.Show(SVData[i]);
+            }
+            return SVData;
+        }
+
+
         public Form1()
         {
             InitializeComponent();
             dataGridView1.DataSource = CSDL.Instance.DTSV;
             setCBBLopSH();
-        }
-
-        public void getCBBLopSH()
-        {
-            
-            
         }
         public void setCBBLopSH()
         {
@@ -62,5 +72,14 @@ namespace BaiTap_Mr.Phuong
                
             dataGridView1.DataSource = CSDL.Instance.createDataTable(cbb.Value);
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Detail d = new Detail();
+
+            d.ShowDialog();
+            this.Hide();
+        }
+
     }
 }

@@ -1,0 +1,11 @@
+D:\Code\code c#\.NET\Winform\BaiTap_Mr.Phuong\BaiTap_Mr.Phuong\bin\Debug\BaiTap_Mr.Phuong.exe.config
+D:\Code\code c#\.NET\Winform\BaiTap_Mr.Phuong\BaiTap_Mr.Phuong\bin\Debug\BaiTap_Mr.Phuong.exe
+D:\Code\code c#\.NET\Winform\BaiTap_Mr.Phuong\BaiTap_Mr.Phuong\bin\Debug\BaiTap_Mr.Phuong.pdb
+D:\Code\code c#\.NET\Winform\BaiTap_Mr.Phuong\BaiTap_Mr.Phuong\obj\Debug\BaiTap_Mr.Phuong.csprojAssemblyReference.cache
+D:\Code\code c#\.NET\Winform\BaiTap_Mr.Phuong\BaiTap_Mr.Phuong\obj\Debug\BaiTap_Mr.Phuong.Detail.resources
+D:\Code\code c#\.NET\Winform\BaiTap_Mr.Phuong\BaiTap_Mr.Phuong\obj\Debug\BaiTap_Mr.Phuong.Form1.resources
+D:\Code\code c#\.NET\Winform\BaiTap_Mr.Phuong\BaiTap_Mr.Phuong\obj\Debug\BaiTap_Mr.Phuong.Properties.Resources.resources
+D:\Code\code c#\.NET\Winform\BaiTap_Mr.Phuong\BaiTap_Mr.Phuong\obj\Debug\BaiTap_Mr.Phuong.csproj.GenerateResource.cache
+D:\Code\code c#\.NET\Winform\BaiTap_Mr.Phuong\BaiTap_Mr.Phuong\obj\Debug\BaiTap_Mr.Phuong.csproj.CoreCompileInputs.cache
+D:\Code\code c#\.NET\Winform\BaiTap_Mr.Phuong\BaiTap_Mr.Phuong\obj\Debug\BaiTap_Mr.Phuong.exe
+D:\Code\code c#\.NET\Winform\BaiTap_Mr.Phuong\BaiTap_Mr.Phuong\obj\Debug\BaiTap_Mr.Phuong.pdb

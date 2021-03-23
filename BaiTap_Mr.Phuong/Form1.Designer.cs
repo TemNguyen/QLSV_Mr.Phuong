@@ -60,6 +60,7 @@
             this.cbbLopSH.Name = "cbbLopSH";
             this.cbbLopSH.Size = new System.Drawing.Size(169, 24);
             this.cbbLopSH.TabIndex = 1;
+            this.cbbLopSH.SelectedIndexChanged += new System.EventHandler(this.cbbLopSH_SelectedIndexChanged);
             // 
             // txbSearch
             // 

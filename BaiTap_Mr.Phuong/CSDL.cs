@@ -58,7 +58,7 @@ namespace BaiTap_Mr.Phuong
             dr3["NameSV"] = "NTC";
             dr3["Gender"] = false;
             dr3["NS"] = DateTime.Now;
-            dr3["ID_Lop"] = 3;
+            dr3["ID_Lop"] = 1;
             DTSV.Rows.Add(dr3);
 
             DTLSH = new DataTable();
@@ -79,7 +79,7 @@ namespace BaiTap_Mr.Phuong
             DTLSH.Rows.Add(dr5);
         }
 
-        public DataTable createDataTable(int ID_Lop)
+        public DataTable createDataTable(int id_Lop)
         {
             DataTable dt = new DataTable();
             dt.Columns.AddRange(new DataColumn[]
@@ -91,8 +91,8 @@ namespace BaiTap_Mr.Phuong
                 new DataColumn("ID_Lop", typeof(int))
             });
             foreach(DataRow dr in DTSV.Rows)
-            {
-                if (Convert.ToInt32(dr["ID_Lop"]) == ID_Lop) dt.Rows.Add(dr);
+            {     
+                if (Convert.ToInt32(dr["ID_Lop"]) == id_Lop) dt.Rows.Add(dr.ItemArray);
             }
             return dt;
         }

@@ -96,5 +96,21 @@ namespace BaiTap_Mr.Phuong
             }
             return dt;
         }
+
+        public void setDataTable(object[] SV)
+        {
+            DataRow dr = DTSV.NewRow();
+            dr.ItemArray = SV;
+            DTSV.Rows.Add(dr);
+        }
+        public object[] getDataTable(object[] SV, int index)
+        {
+            SV = DTSV.Rows[index].ItemArray;
+            return SV;
+        }
+        public void changeDataTable(object[] SV, int index)
+        {
+            DTSV.Rows[index].ItemArray = SV;
+        }
     }
 }

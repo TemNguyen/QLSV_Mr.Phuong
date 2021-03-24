@@ -61,6 +61,14 @@ namespace BaiTap_Mr.Phuong
             dr3["ID_Lop"] = 1;
             DTSV.Rows.Add(dr3);
 
+            DataRow dr4 = DTSV.NewRow();
+            dr4["MSSV"] = "102190191";
+            dr4["NameSV"] = "Tem";
+            dr4["Gender"] = true;
+            dr4["NS"] = DateTime.Now;
+            dr4["ID_Lop"] = 2;
+            DTSV.Rows.Add(dr4);
+
             DTLSH = new DataTable();
             DTLSH.Columns.AddRange(new DataColumn[]
             {
@@ -68,15 +76,15 @@ namespace BaiTap_Mr.Phuong
                 new DataColumn("NameLop")
             });
 
-            DataRow dr4 = DTLSH.NewRow();
-            dr4["ID_Lop"] = 1;
-            dr4["NameLop"] = "LSH1";
-            DTLSH.Rows.Add(dr4);
-
             DataRow dr5 = DTLSH.NewRow();
-            dr5["ID_Lop"] = 2;
-            dr5["NameLop"] = "LSH2";
+            dr5["ID_Lop"] = 1;
+            dr5["NameLop"] = "LSH1";
             DTLSH.Rows.Add(dr5);
+
+            DataRow dr6 = DTLSH.NewRow();
+            dr6["ID_Lop"] = 2;
+            dr6["NameLop"] = "LSH2";
+            DTLSH.Rows.Add(dr6);
         }
 
         public DataTable createDataTable(string value)
@@ -137,6 +145,17 @@ namespace BaiTap_Mr.Phuong
             temp.DefaultView.Sort = value + " DESC";
             temp = temp.DefaultView.ToTable();
             return temp;
+        }
+
+        public int getRealIndex(string value)
+        {
+            int index = 0;
+            foreach (DataRow dr in DTSV.Rows)
+            {
+                if (dr["MSSV"].ToString() == value) return index;
+                index++;
+            }
+            return -1;
         }
     }
 }

@@ -12,9 +12,6 @@ namespace BaiTap_Mr.Phuong
 {
     public partial class Form1 : Form
     {
-        
-
-
         public Form1()
         {
             InitializeComponent();
@@ -41,22 +38,24 @@ namespace BaiTap_Mr.Phuong
             {
                 cbbSort.Items.Add(dc.ColumnName);
             }
+            cbbSort.SelectedItem = "MSSV";
         }
 
         private void btnShow_Click(object sender, EventArgs e)
         {
-            int index = cbbLopSH.SelectedIndex;
-            CBBItems cbb = new CBBItems()
-            {
-                Text = cbbLopSH.Items[index].ToString(),
-                Value = Convert.ToInt32(CSDL.Instance.DTLSH.Rows[index]["ID_Lop"])
-            };
-            dataGridView1.DataSource = CSDL.Instance.createDataTable(cbb.Value.ToString());
+            //int index = cbbLopSH.SelectedIndex;
+            //CBBItems cbb = new CBBItems()
+            //{
+            //    Text = cbbLopSH.Items[index].ToString(),
+            //    Value = Convert.ToInt32(CSDL.Instance.DTLSH.Rows[index]["ID_Lop"])
+            //};
+            //dataGridView1.DataSource = CSDL.Instance.createDataTable(cbb.Value.ToString());
         }
 
         private void cbbLopSH_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = cbbLopSH.SelectedIndex;
+            //All SV
             if (index == cbbLopSH.Items.Count - 1)
             {
                 dataGridView1.DataSource = CSDL.Instance.DTSV;
@@ -67,7 +66,6 @@ namespace BaiTap_Mr.Phuong
                 Text = cbbLopSH.Items[index].ToString(),
                 Value = Convert.ToInt32(CSDL.Instance.DTLSH.Rows[index]["ID_Lop"])
             };
-               
             dataGridView1.DataSource = CSDL.Instance.createDataTable(cbb.Value.ToString());
         }
 
@@ -82,7 +80,10 @@ namespace BaiTap_Mr.Phuong
         private void btnEdit_Click(object sender, EventArgs e)
         {
             Detail d = new Detail();
-            d.Sender(dataGridView1.CurrentRow.Index, "edit");
+            int index = 0;
+            string SVID = dataGridView1.CurrentRow.Cells["MSSV"].Value.ToString();
+            index = CSDL.Instance.getRealIndex(SVID);
+            d.Sender(index, "edit");
             d.ShowDialog();
             this.Hide();
         }
@@ -103,9 +104,9 @@ namespace BaiTap_Mr.Phuong
 
         private void btnSearch_Click(object sender, EventArgs e)
         {   
-            string DataName = txbSearch.Text;
-            dataGridView1.DataSource = CSDL.Instance.createDataTable(DataName);
-            dataGridView1.Refresh();
+            //string DataName = txbSearch.Text;
+            //dataGridView1.DataSource = CSDL.Instance.createDataTable(DataName);
+            //dataGridView1.Refresh();
         }
 
         private void txbSearch_TextChanged(object sender, EventArgs e)

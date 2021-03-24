@@ -95,7 +95,7 @@ namespace BaiTap_Mr.Phuong
             dateTimePicker1.Value = Convert.ToDateTime(SV[3]);
             CBBItems cbb = new CBBItems()
             {
-
+                //cbbIndex bắt đầu từ 0.
                 Text = cbbLopSH.Items[Convert.ToInt32(SV[4]) - 1].ToString()
             };
             cbbLopSH.SelectedItem = cbb.Text;
@@ -114,12 +114,7 @@ namespace BaiTap_Mr.Phuong
 
         private void Detail_Load(object sender, EventArgs e)
         {
-            switch (option)
-            {
-                case "edit":
-                    getFunc();
-                    break;
-            }
+            if (option == "edit") getFunc();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

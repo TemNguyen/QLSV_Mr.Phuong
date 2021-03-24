@@ -29,6 +29,7 @@ namespace BaiTap_Mr.Phuong
             Sender = new getData(getIndex);
             InitializeComponent();
             setCBBLopSH();
+            radioButton1.Checked = true;
         }
         
         public void setCBBLopSH()
@@ -46,11 +47,14 @@ namespace BaiTap_Mr.Phuong
             switch(option)
             {
                 case "add":
-                    setFunc();
+                    if (!setFunc()) return;
                     break;
                 case "edit":
-                    updateFunc();
+                    if (!updateFunc()) return;
                     break;
+                default:
+                    MessageBox.Show("Có lỗi xảy ra, vui lòng thử lại sau!");
+                    return;
             }
             Form1 f1 = new Form1();
             f1.Show();
@@ -73,7 +77,7 @@ namespace BaiTap_Mr.Phuong
         }
 
         //core Function
-        private void setFunc()
+        private bool setFunc()
         {
             object[] SV = new object[CSDL.Instance.DTSV.Columns.Count];
             SV[0] = txtMSSV.Text;
@@ -82,7 +86,16 @@ namespace BaiTap_Mr.Phuong
             else SV[2] = false;
             SV[3] = dateTimePicker1.Value;
             SV[4] = getIDLopSH();
-            CSDL.Instance.setDataTable(SV);
+            if (CSDL.Instance.isPrimaryKey(txtMSSV.Text))
+            {
+                MessageBox.Show("MSSV đã tồn tại!", "Chú ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else
+            {
+                CSDL.Instance.setDataTable(SV);
+                return true;
+            }
         }
         private void getFunc()
         {
@@ -100,7 +113,7 @@ namespace BaiTap_Mr.Phuong
             };
             cbbLopSH.SelectedItem = cbb.Text;
         }
-        private void updateFunc()
+        private bool updateFunc()
         {
             object[] SV = new object[CSDL.Instance.DTSV.Columns.Count];
             SV[0] = txtMSSV.Text;
@@ -109,7 +122,21 @@ namespace BaiTap_Mr.Phuong
             else SV[2] = false;
             SV[3] = dateTimePicker1.Value;
             SV[4] = getIDLopSH();
-            CSDL.Instance.changeDataTable(SV, index);
+            object[] temp = new object[CSDL.Instance.DTSV.Columns.Count];
+            temp = CSDL.Instance.getDataTable(temp, index);
+            if (temp[0].ToString() != txtMSSV.Text)
+            {
+                if (CSDL.Instance.isPrimaryKey(txtMSSV.Text))
+                {
+                    MessageBox.Show("MSSV đã tồn tại!", "Chú ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+            else
+            {
+                CSDL.Instance.changeDataTable(SV, index);
+            }
+            return true;
         }
 
         private void Detail_Load(object sender, EventArgs e)
@@ -119,8 +146,22 @@ namespace BaiTap_Mr.Phuong
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            Detail d = new Detail();
-            d.Hide();
+            if (txtMSSV.Text != null || txtName.Text != null)
+            {
+                DialogResult dl = MessageBox.Show("Thông tin chưa được lưu!, Bạn có muốn quay lại không?", "Chú ý", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                switch(dl)
+                {
+                    case DialogResult.Yes:
+                        Form1 f1 = new Form1();
+                        f1.Show();
+                        this.Hide();
+                        break;
+                    case DialogResult.No:
+                        break;
+                }    
+            }                
+                
+            
         }
     }
 }

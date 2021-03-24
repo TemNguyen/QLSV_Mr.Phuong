@@ -54,19 +54,7 @@ namespace BaiTap_Mr.Phuong
 
         private void cbbLopSH_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int index = cbbLopSH.SelectedIndex;
-            //All SV
-            if (index == cbbLopSH.Items.Count - 1)
-            {
-                dataGridView1.DataSource = CSDL.Instance.DTSV;
-                return;
-            }    
-            CBBItems cbb = new CBBItems()
-            {
-                Text = cbbLopSH.Items[index].ToString(),
-                Value = Convert.ToInt32(CSDL.Instance.DTLSH.Rows[index]["ID_Lop"])
-            };
-            dataGridView1.DataSource = CSDL.Instance.createDataTable(cbb.Value.ToString());
+            refreshByFilter();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -90,8 +78,19 @@ namespace BaiTap_Mr.Phuong
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            int index = dataGridView1.CurrentRow.Index;
-            CSDL.Instance.deleteDataTable(index);
+            DialogResult d = MessageBox.Show("Bạn có chắc chắn muốn xóa bản ghi này không?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            switch (d)
+            {
+                case DialogResult.Yes:
+                    string SVID = dataGridView1.CurrentRow.Cells["MSSV"].Value.ToString();
+                    int index = CSDL.Instance.getRealIndex(SVID);
+                    CSDL.Instance.deleteDataTable(index);
+                    refreshByFilter();
+                    break;
+                case DialogResult.No:
+                    break;
+            }    
+            
         }
 
         private void btnSort_Click(object sender, EventArgs e)
@@ -114,6 +113,22 @@ namespace BaiTap_Mr.Phuong
             string DataName = txbSearch.Text;
             dataGridView1.DataSource = CSDL.Instance.createDataTable(DataName);
             dataGridView1.Refresh();
+        }
+        private void refreshByFilter()
+        {
+            int index = cbbLopSH.SelectedIndex;
+            //All SV
+            if (index == cbbLopSH.Items.Count - 1)
+            {
+                dataGridView1.DataSource = CSDL.Instance.DTSV;
+                return;
+            }
+            CBBItems cbb = new CBBItems()
+            {
+                Text = cbbLopSH.Items[index].ToString(),
+                Value = Convert.ToInt32(CSDL.Instance.DTLSH.Rows[index]["ID_Lop"])
+            };
+            dataGridView1.DataSource = CSDL.Instance.createDataTable(cbb.Value.ToString());
         }
     }
 }

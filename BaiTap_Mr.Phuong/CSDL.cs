@@ -155,7 +155,15 @@ namespace BaiTap_Mr.Phuong
                 if (dr["MSSV"].ToString() == value) return index;
                 index++;
             }
-            return -1;
+            return 0;
+        }
+        public bool isPrimaryKey(string value)
+        {
+            foreach (DataRow dr in DTSV.Rows)
+            {
+                if (dr["MSSV"].ToString() == value) return true;
+            }
+            return false;
         }
     }
 }

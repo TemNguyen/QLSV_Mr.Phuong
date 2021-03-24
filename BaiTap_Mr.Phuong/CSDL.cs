@@ -79,7 +79,7 @@ namespace BaiTap_Mr.Phuong
             DTLSH.Rows.Add(dr5);
         }
 
-        public DataTable createDataTable(int id_Lop)
+        public DataTable createDataTable(string value)
         {
             DataTable dt = new DataTable();
             dt.Columns.AddRange(new DataColumn[]
@@ -91,8 +91,8 @@ namespace BaiTap_Mr.Phuong
                 new DataColumn("ID_Lop", typeof(int))
             });
             foreach(DataRow dr in DTSV.Rows)
-            {     
-                if (Convert.ToInt32(dr["ID_Lop"]) == id_Lop) dt.Rows.Add(dr.ItemArray);
+            {
+                if (dr["ID_Lop"].ToString() == value || dr["NameSV"].ToString().Contains(value)) dt.Rows.Add(dr.ItemArray);
             }
             return dt;
         }

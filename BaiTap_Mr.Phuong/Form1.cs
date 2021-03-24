@@ -32,6 +32,7 @@ namespace BaiTap_Mr.Phuong
                 cbbLopSH.Items.Add(dr["NameLop"]);
             }
             cbbLopSH.Items.Add("All");
+            cbbLopSH.SelectedItem = "All";
         }
         public void setCBBSort()
         {
@@ -50,7 +51,7 @@ namespace BaiTap_Mr.Phuong
                 Text = cbbLopSH.Items[index].ToString(),
                 Value = Convert.ToInt32(CSDL.Instance.DTLSH.Rows[index]["ID_Lop"])
             };
-            dataGridView1.DataSource = CSDL.Instance.createDataTable(cbb.Value);
+            dataGridView1.DataSource = CSDL.Instance.createDataTable(cbb.Value.ToString());
         }
 
         private void cbbLopSH_SelectedIndexChanged(object sender, EventArgs e)
@@ -67,7 +68,7 @@ namespace BaiTap_Mr.Phuong
                 Value = Convert.ToInt32(CSDL.Instance.DTLSH.Rows[index]["ID_Lop"])
             };
                
-            dataGridView1.DataSource = CSDL.Instance.createDataTable(cbb.Value);
+            dataGridView1.DataSource = CSDL.Instance.createDataTable(cbb.Value.ToString());
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -82,7 +83,7 @@ namespace BaiTap_Mr.Phuong
         {
             Detail d = new Detail();
             d.Sender(dataGridView1.CurrentRow.Index, "edit");
-            d.Show();
+            d.ShowDialog();
             this.Hide();
         }
 
@@ -98,6 +99,20 @@ namespace BaiTap_Mr.Phuong
             CSDL.Instance.cloneDataTable(temp);
             CSDL.Instance.sortDataTable(temp, cbbSort.SelectedItem.ToString());
             dataGridView1.DataSource = temp;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {   
+            string DataName = txbSearch.Text;
+            dataGridView1.DataSource = CSDL.Instance.createDataTable(DataName);
+            dataGridView1.Refresh();
+        }
+
+        private void txbSearch_TextChanged(object sender, EventArgs e)
+        {
+            string DataName = txbSearch.Text;
+            dataGridView1.DataSource = CSDL.Instance.createDataTable(DataName);
+            dataGridView1.Refresh();
         }
     }
 }

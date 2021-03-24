@@ -21,6 +21,7 @@ namespace BaiTap_Mr.Phuong
             dataGridView1.DataSource = CSDL.Instance.DTSV;
             dataGridView1.Refresh();
             setCBBLopSH();
+            setCBBSort();
         }
         public void setCBBLopSH()
         {
@@ -31,6 +32,14 @@ namespace BaiTap_Mr.Phuong
                 cbbLopSH.Items.Add(dr["NameLop"]);
             }
             cbbLopSH.Items.Add("All");
+        }
+        public void setCBBSort()
+        {
+            DataTable dt = CSDL.Instance.DTSV;
+            foreach (DataColumn dc in dt.Columns)
+            {
+                cbbSort.Items.Add(dc.ColumnName);
+            }
         }
 
         private void btnShow_Click(object sender, EventArgs e)
@@ -77,5 +86,18 @@ namespace BaiTap_Mr.Phuong
             this.Hide();
         }
 
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            int index = dataGridView1.CurrentRow.Index;
+            CSDL.Instance.deleteDataTable(index);
+        }
+
+        private void btnSort_Click(object sender, EventArgs e)
+        {
+            DataTable temp = new DataTable();
+            CSDL.Instance.cloneDataTable(temp);
+            CSDL.Instance.sortDataTable(temp, cbbSort.SelectedItem.ToString());
+            dataGridView1.DataSource = temp;
+        }
     }
 }

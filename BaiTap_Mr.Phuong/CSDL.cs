@@ -112,5 +112,31 @@ namespace BaiTap_Mr.Phuong
         {
             DTSV.Rows[index].ItemArray = SV;
         }
+        public void deleteDataTable(int index)
+        {
+            DTSV.Rows.Remove(DTSV.Rows[index]);
+        }
+        public DataTable cloneDataTable(DataTable temp)
+        {
+            temp.Columns.AddRange(new DataColumn[]
+            {
+                new DataColumn("MSSV"),
+                new DataColumn("NameSV"),
+                new DataColumn("Gender", typeof(bool)),
+                new DataColumn("NS", typeof(DateTime)),
+                new DataColumn("ID_Lop", typeof(int))
+            });
+            foreach(DataRow dr in DTSV.Rows)
+            {
+                temp.Rows.Add(dr.ItemArray);
+            }
+            return temp;
+        }
+        public DataTable sortDataTable(DataTable temp, string value)
+        {
+            temp.DefaultView.Sort = value + " DESC";
+            temp = temp.DefaultView.ToTable();
+            return temp;
+        }
     }
 }

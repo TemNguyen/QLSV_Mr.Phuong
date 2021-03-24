@@ -130,5 +130,10 @@ namespace BaiTap_Mr.Phuong
             };
             dataGridView1.DataSource = CSDL.Instance.createDataTable(cbb.Value.ToString());
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace BaiTap_Mr.Phuong
             }
             Form1 f1 = new Form1();
             f1.Show();
-            this.Hide();
+            this.Close();
         }
         private int getIDLopSH()
         {
@@ -86,7 +86,12 @@ namespace BaiTap_Mr.Phuong
             else SV[2] = false;
             SV[3] = dateTimePicker1.Value;
             SV[4] = getIDLopSH();
-            if (CSDL.Instance.isPrimaryKey(txtMSSV.Text))
+            if (txtMSSV.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập MSSV", "Chú ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }    
+            else if (CSDL.Instance.isPrimaryKey(txtMSSV.Text))
             {
                 MessageBox.Show("MSSV đã tồn tại!", "Chú ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;

@@ -184,6 +184,7 @@
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
             this.Name = "Detail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thong tin chi tiet.";
             this.Load += new System.EventHandler(this.Detail_Load);
             this.groupBox1.ResumeLayout(false);
